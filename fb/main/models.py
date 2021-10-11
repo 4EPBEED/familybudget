@@ -6,7 +6,7 @@ class FamilyMember(models.Model):
     name = models.CharField(max_length=30)
     age = models.IntegerField()
 
-class IncomeSource():
+class IncomeSource(models.Model):
     title = models.CharField(max_length=30)
     desc = models.CharField(max_length=200)
 
@@ -23,7 +23,7 @@ class Income(models.Model):
                                     blank=True,
                                     null=True)
 
-class ExpenseSource():
+class ExpenseSource(models.Model):
     title = models.CharField(max_length=30)
     desc = models.CharField(max_length=200)
 
