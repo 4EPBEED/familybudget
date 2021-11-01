@@ -10,6 +10,9 @@ class IncomeSource(models.Model):
     title = models.CharField(max_length=30)
     desc = models.CharField(max_length=200)
 
+    def __str__(self):
+        return '%s' % self.title
+
 class Income(models.Model):
     amount = models.FloatField()
     desc = models.CharField(max_length=200)
@@ -26,6 +29,9 @@ class Income(models.Model):
 class ExpenseSource(models.Model):
     title = models.CharField(max_length=30)
     desc = models.CharField(max_length=200)
+
+    def __str__(self):
+        return '%s' % self.title
 
 class Expense(models.Model):
     amount = models.FloatField()
