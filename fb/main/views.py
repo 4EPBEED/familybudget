@@ -24,8 +24,8 @@ months = {
 
 # Create your views here.
 def index(request):
-    incomes = Income.objects.all()
-    expenses = Expense.objects.all()
+    incomes = Income.objects.all().order_by('-date')
+    expenses = Expense.objects.all().order_by('-date')
 
     monthsTotal = [0 for i in range(1, 13)]
 
