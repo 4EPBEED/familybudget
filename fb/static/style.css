@@ -79,6 +79,15 @@ h1 {
     border: 1px solid #ddd;
 }
 
+table td {
+    font-size: 15px;
+}
+
+table th,
+table td {
+    text-align: center;
+}
+
 @media (max-width: 1000px) {
     .content-wrapper > div {
         display: block;
