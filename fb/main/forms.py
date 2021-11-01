@@ -4,6 +4,8 @@ from django.forms import ModelForm
 
 from main.models import *
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class IncomeForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -16,6 +18,10 @@ class IncomeForm(ModelForm):
         model = Income
         fields = ['amount', 'desc', 'date']
 
+        widgets = {
+            'date': DateInput(),
+        }
+
 class ExpenseForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ModelForm, self).__init__(*args, **kwargs)
@@ -26,3 +32,7 @@ class ExpenseForm(ModelForm):
     class Meta:
         model = Expense
         fields = ['amount', 'desc', 'date']
+
+        widgets = {
+            'date': DateInput(),
+        }
