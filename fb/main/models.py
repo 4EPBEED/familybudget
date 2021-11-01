@@ -6,6 +6,9 @@ class FamilyMember(models.Model):
     name = models.CharField(max_length=30)
     age = models.IntegerField()
 
+    def __str__(self):
+        return '%s' % self.name
+
 class IncomeSource(models.Model):
     title = models.CharField(max_length=30)
     desc = models.CharField(max_length=200)

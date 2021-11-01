@@ -40,6 +40,10 @@ h1 {
     font-size: 0px;
 }
 
+.active-month {
+    border: 2px solid black !important;
+}
+
 .months > .month {
     display: inline-block;
     font-size: 15px;
@@ -76,6 +80,7 @@ h1 {
 
 .table-title {
     text-align: center;
+    font-size: 20px;
     border: 1px solid #ddd;
 }
 
@@ -83,12 +88,16 @@ table td {
     font-size: 15px;
 }
 
+table th {
+    font-size: 17px;
+}
+
 table th,
 table td {
     text-align: center;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .content-wrapper > div {
         display: block;
         width: 100%;

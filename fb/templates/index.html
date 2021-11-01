@@ -33,23 +33,26 @@
             <div class="adder-type">Источник расхода</div><button type="button" data-toggle="modal" data-target="#expenseSourceModal">
                 +
             </button>
-            <div class="adder-type">Член семьи</div><div class="plus">+</div>
+            <div class="adder-type">Член семьи</div><button type="button" data-toggle="modal" data-target="#familyMemberModal">
+                +
+            </button>
         </div>
         <div class="months">
-            <div class="month">Январь</div>
-            <div class="month">Февраль</div>
-            <div class="month">Март</div>
-            <div class="month">Апрель</div>
-            <div class="month">Май</div>
-            <div class="month">Июнь</div>
-            <div class="month">Июль</div>
-            <div class="month">Август</div>
-            <div class="month">Сентябрь</div>
-            <div class="month">Октябрь</div>
-            <div class="month">Ноябрь</div>
-            <div class="month">Декабрь</div>
+            <div class="month">Январь <br>{{monthsTotal.0}} руб.</div>
+            <div class="month">Февраль <br>{{monthsTotal.1}} руб.</div>
+            <div class="month">Март <br>{{monthsTotal.2}} руб.</div>
+            <div class="month">Апрель <br>{{monthsTotal.3}} руб.</div>
+            <div class="month">Май <br>{{monthsTotal.4}} руб.</div>
+            <div class="month">Июнь <br>{{monthsTotal.5}} руб.</div>
+            <div class="month">Июль <br>{{monthsTotal.6}} руб.</div>
+            <div class="month">Август <br>{{monthsTotal.7}} руб.</div>
+            <div class="month">Сентябрь <br>{{monthsTotal.8}} руб.</div>
+            <div class="month">Октябрь <br>{{monthsTotal.9}} руб.</div>
+            <div class="month">Ноябрь <br>{{monthsTotal.10}} руб.</div>
+            <div class="month">Декабрь <br>{{monthsTotal.11}} руб.</div>
         </div>
     </header>
+
 
 <!-- incomes create modal -->
 <div class="modal fade" id="incomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -135,6 +138,27 @@
   </div>
 </div>
 
+<!-- family member create modal -->
+<div class="modal fade" id="familyMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавить члена семьи</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="family-member/create" method="post">
+        {% csrf_token %}
+        {{familyMemberForm.as_p}}
+        <input type="submit" value="Добавить">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
     
@@ -149,6 +173,7 @@
                   <th scope="col">Наименование</th>
                   <th scope="col">Сумма</th>
                   <th scope="col">Источник</th>
+                  <th scope="col">Член семьи</th>
                   <th scope="col">Дата</th>
                 </tr>
             </thead>
@@ -159,6 +184,7 @@
                       <td>{{ expense.desc }}</td>
                       <td>{{ expense.amount }} руб.</td>
                       <td>{% firstof expense.expenseSource "-"%}</td>
+                      <td>{% firstof expense.familyMember "-"%}</td>
                       <td>{{ expense.date }}</td>
                     </tr>
                 {% endfor %}
@@ -174,6 +200,7 @@
                   <th scope="col">Наименование</th>
                   <th scope="col">Сумма</th>
                   <th scope="col">Источник</th>
+                  <th scope="col">Член семьи</th>
                   <th scope="col">Дата</th>
                 </tr>
             </thead>
@@ -184,6 +211,7 @@
                       <td>{{ income.desc }}</td>
                       <td>{{ income.amount }} руб.</td>
                       <td>{% firstof income.incomeSource "-"%}</td>
+                      <td>{% firstof income.familyMember "-"%}</td>
                       <td>{{ income.date }}</td>
                     </tr>
                 {% endfor %}
@@ -191,5 +219,52 @@
             </table>
         </div>
     </div>
+    <script>
+      var months = {
+        "Январь": 1,
+        "Февраль": 2,
+        "Март": 3,
+        "Апрель": 4,
+        "Май": 5,
+        "Июнь": 6,
+        "Июль": 7,
+        "Август": 8,
+        "Сентябрь": 9,
+        "Октябрь": 10,
+        "Ноябрь": 11,
+        "Декабрь": 12,
+      }
+
+      function showMonthIncExp(month) {
+        $("tbody tr").hide();
+
+        $("tbody td:nth-child(6)").each( function() {
+          var elMonth = $(this).text().split(" ")[1].substring(0, 3);
+          var curMonth = month.toLowerCase().substring(0, 3);
+          debugger;
+          if (elMonth == curMonth) {
+            $(this).parent().show();
+          };
+        })
+      }
+
+      var monthsEl = $("div.month");
+      monthsEl.each( function() {
+        month = $(this).text().split(" ")[0];
+    
+        if (months[month] == {{currentMonth}}) {
+          $(this).addClass("active-month");
+          showMonthIncExp(month);
+        }
+      })
+
+      monthsEl.each( function() {
+        $(this).on("click", function() {
+          monthsEl.removeClass("active-month");
+          $(this).addClass("active-month");
+          showMonthIncExp($(this).text().split(" ")[0]);
+        })
+      })
+    </script>
 </body>
 </html>

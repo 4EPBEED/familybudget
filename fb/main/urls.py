@@ -7,4 +7,5 @@ urlpatterns = [
     path("expense/create", views.expenseCreate, name='expense-create'),
     path("income/source/create", views.incomeSourceCreate, name='income-source-create'),
     path("expense/source/create", views.expenseSourceCreate, name='income-source-create'),
+    path("family-member/create", views.familyMemberCreate, name='family-member-create'),
 ]

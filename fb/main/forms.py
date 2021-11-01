@@ -14,10 +14,11 @@ class IncomeForm(ModelForm):
         self.fields['desc'].label = "Описание"
         self.fields['date'].label = "Дата"
         self.fields['incomeSource'].label = "Источник дохода"
+        self.fields['familyMember'].label = "Член семьи"
 
     class Meta:
         model = Income
-        fields = ['amount', 'incomeSource', 'desc', 'date']
+        fields = ['amount', 'incomeSource', 'familyMember', 'desc', 'date']
 
         widgets = {
             'date': DateInput(),
@@ -30,10 +31,11 @@ class ExpenseForm(ModelForm):
         self.fields['desc'].label = "Описание"
         self.fields['date'].label = "Дата"
         self.fields['expenseSource'].label = "Источник расхода"
+        self.fields['familyMember'].label = "Член семьи"
         
     class Meta:
         model = Expense
-        fields = ['amount', 'expenseSource', 'desc', 'date']
+        fields = ['amount', 'expenseSource', 'familyMember', 'desc', 'date']
 
         widgets = {
             'date': DateInput(),
@@ -56,3 +58,13 @@ class ExpenseSourceForm(ModelForm):
     class Meta:
         model = ExpenseSource
         fields = ['title']
+
+class FamilyMemberForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        self.fields['name'].label = "Имя"
+        self.fields['age'].label = "Возраст"
+
+    class Meta:
+        model = FamilyMember
+        fields = ['name', 'age']
