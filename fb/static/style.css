@@ -44,6 +44,10 @@ h1 {
     border: 2px solid black !important;
 }
 
+.active-item {
+    border: 2px solid black !important;
+}
+
 .months > .month {
     display: inline-block;
     font-size: 15px;
