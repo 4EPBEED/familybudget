@@ -38,3 +38,21 @@ class ExpenseForm(ModelForm):
         widgets = {
             'date': DateInput(),
         }
+
+class IncomeSourceForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        self.fields['title'].label = "Название источника"
+
+    class Meta:
+        model = IncomeSource
+        fields = ['title']
+
+class ExpenseSourceForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        self.fields['title'].label = "Название источника"
+
+    class Meta:
+        model = ExpenseSource
+        fields = ['title']

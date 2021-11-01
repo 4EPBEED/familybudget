@@ -27,7 +27,12 @@
             <div class="adder-type">Доход</div><button type="button" data-toggle="modal" data-target="#incomeModal">
                 +
             </button>
-            <div class="adder-type">Источник</div><div class="plus">+</div>
+            <div class="adder-type">Источник дохода</div><button type="button" data-toggle="modal" data-target="#incomeSourceModal">
+                +
+            </button>
+            <div class="adder-type">Источник расхода</div><button type="button" data-toggle="modal" data-target="#expenseSourceModal">
+                +
+            </button>
             <div class="adder-type">Член семьи</div><div class="plus">+</div>
         </div>
         <div class="months">
@@ -46,7 +51,7 @@
         </div>
     </header>
 
-<!-- incomes -->
+<!-- incomes create modal -->
 <div class="modal fade" id="incomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -67,6 +72,7 @@
   </div>
 </div>
 
+<!-- expense create modal -->
 <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -80,6 +86,48 @@
         <form action="expense/create" method="post">
         {% csrf_token %}
         {{expenseForm.as_p}}
+        <input type="submit" value="Добавить">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- income source  create modal -->
+<div class="modal fade" id="incomeSourceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавить источник дохода</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="income/source/create" method="post">
+        {% csrf_token %}
+        {{incomeSourceForm.as_p}}
+        <input type="submit" value="Добавить">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- expense source  create modal -->
+<div class="modal fade" id="expenseSourceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавить источник расхода</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="expense/source/create" method="post">
+        {% csrf_token %}
+        {{expenseSourceForm.as_p}}
         <input type="submit" value="Добавить">
         </form>
       </div>
